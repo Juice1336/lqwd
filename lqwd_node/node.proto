@@ -1,0 +1,48 @@
+syntax = "proto3";
+
+package node;
+
+option go_package="test.com/lqwd_node;lqwd_node";
+
+service NodeService{
+    rpc SpawnNodes (nodeDetails) returns (Node);
+    rpc GetNodesListByStatus (Status) returns (Node);
+    rpc DestroyNode(nodeId) returns (Node);
+}
+
+message nodeDetails{
+    string nodeName = 1;
+    string ip = 2;
+    string userId = 3;
+    enum Status {
+        RUNNING = 0;
+        FAILED = 1;
+    }
+    optional Status status = 4;
+    string createdAt = 5;
+}
+
+message Status{
+    enum Status {
+        RUNNING = 0;
+        FAILED = 1;
+    }
+    optional Status status = 4;
+}
+
+message nodeId{
+    string nodeId =1;
+}
+
+message Node{
+    string nodeName = 1;
+    string ip = 2;
+    string userId = 3;
+    enum Status {
+        RUNNING = 0;
+        FAILED = 1;
+    }
+    optional Status status = 4;
+    string createdAt = 5;
+    string id = 6;
+}
